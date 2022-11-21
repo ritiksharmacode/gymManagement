@@ -14,6 +14,8 @@ const mongoSave = async (res, useModel, useMessage, useData) => {
 
 const mongoUpdate = async (res, useModel, useMessage, useData, useID) => {
   try {
+    let savedData = await useModel.updateOne({ _id: useID }, useData);
+    res.status(201).json({ message: `${useMessage} updated`, data: savedData });
   } catch (error) {
     console.log("save error", error);
     res.status(401).json({ message: error.message });

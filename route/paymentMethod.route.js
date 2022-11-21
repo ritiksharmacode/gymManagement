@@ -1,6 +1,6 @@
 import express from "express";
 import paymentMethodConnection from "../model/paymentMethod.model.js";
-import { mongoSave } from "../utils/mongo.utils.js";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
 
 const paymentMethod = express.Router();
 const useModel = paymentMethodConnection;
@@ -27,21 +27,12 @@ paymentMethod.post("/", async (req, res) => {
 });
 
 paymentMethod.put("/:useID", async (req, res) => {
-  try {
-    let paymentMethodData = {
-      paymentMethod: req.body.paymentMethod,
-      remarks: req.body.remarks,
-    };
+  let useBody = {
+    paymentMethod: req.body.paymentMethod,
+    remarks: req.body.remarks,
+  };
 
-    let saveData = await useModel.updateOne(
-      { _id: req.params.useID },
-      paymentMethodData
-    );
-    res.status(201).json({ message: `${useMessage} updated`, data: saveData });
-  } catch (error) {
-    console.log("save error", error);
-    res.status(401).json({ message: error.message });
-  }
+  mongoUpdate(res, useModel, useMessage, useBody, req.params.useID);
 });
 
 paymentMethod.delete("/:useID", async (req, res) => {
