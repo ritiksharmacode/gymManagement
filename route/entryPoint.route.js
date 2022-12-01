@@ -5,6 +5,7 @@ import gymInfoConnection from "../model/gymInfo.model.js";
 import staffInfoConnection from "../model/staffInfo.model.js";
 import accessLevelConnection from "../model/accessLevel.model.js";
 import { jwtSecretKey } from "../utils/common.utils.js";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
 
 const entryPoint = express.Router();
 

@@ -1,23 +1,17 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import staffInfoConnection from "../model/staffInfo.model.js";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
 
 const authorizedStaff = express.Router();
 
 authorizedStaff.put("/", async (req, res) => {
-  try {
-    const bcryptPassword = await bcrypt.hash(`${req.body.password}`, 12);
-    let saveData = await staffInfoConnection.updateOne(
-      { gymContact: req.body.userName },
-      {
-        password: bcryptPassword,
-      }
-    );
-    res.status(201).json({ message: "password changed", data: saveData });
-  } catch (error) {
-    console.log("save error", error);
-    res.status(400).json({ message: error.message });
-  }
+  const bcryptPassword = await bcrypt.hash(`${req.body.password}`, 12);
+  let useBody = {
+    gymContact: req.body.userName,
+    password: bcryptPassword,
+  };
+  mongoUpdate(res, useModel, useMessage, useBody, req.params.useID);
 });
 
 authorizedStaff.delete("/", async (req, res) => {

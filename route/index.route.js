@@ -18,6 +18,7 @@ import purpose from "../route/purpose.route.js";
 import staffInfo from "../route/staffInfo.route.js";
 import subscription from "../route/subscription.route.js";
 import workOutPlan from "../route/workOutPlan.route.js";
+import common from "../route/common.route.js";
 
 import { jwtSecretKey } from "../utils/common.utils.js";
 
@@ -68,5 +69,6 @@ router.use("/purpose", checkStaffToken, purpose);
 router.use("/staffInfo", checkStaffToken, staffInfo);
 router.use("/subscription", checkStaffToken, subscription);
 router.use("/workOutPlan", checkStaffToken, workOutPlan);
+router.use("/common", checkStaffToken, common);
 
 export default router;
