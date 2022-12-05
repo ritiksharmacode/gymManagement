@@ -2,8 +2,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import * as dotenv from "dotenv";
 import router from "./route/index.route.js";
 
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +23,9 @@ const start = async () => {
     db.once("open", function () {
       console.log("connected successfully");
     });
-    app.listen(3003, () => console.log("Server started on port 3003"));
+    app.listen(process.env.PORT_NO, () =>
+      console.log("Server started on port " + process.env.PORT_NO)
+    );
   } catch (error) {
     console.log(error);
     process.exit(1);

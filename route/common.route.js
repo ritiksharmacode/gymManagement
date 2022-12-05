@@ -1,4 +1,5 @@
 import express from "express";
+import bcrypt from "bcrypt";
 import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
 
 import accessLevelConnection from "../model/accessLevel.model.js";
@@ -54,7 +55,24 @@ common.post("/", async (req, res) => {
 common.post("/save", async (req, res) => {
   const nowBody = req.body;
 
+  if (nowBody.useModel == "staffInfo") {
+    const bcryptPassword = await bcrypt.hash(`${nowBody.gymContact}`, 12);
+    nowBody.useData.password = bcryptPassword;
+  }
+
   mongoSave(res, allConnections[nowBody.useModel], useMessage, nowBody.useData);
+});
+
+common.put("/update", async (req, res) => {
+  const nowBody = req.body;
+
+  mongoUpdate(
+    res,
+    allConnections[nowBody.useModel],
+    useMessage,
+    nowBody.useData,
+    nowBody.useID
+  );
 });
 
 common.post("/delete", async (req, res) => {
