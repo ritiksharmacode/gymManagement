@@ -1,11 +1,11 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import gymInfoConnection from "../model/gymInfo.model.js";
-import staffInfoConnection from "../model/staffInfo.model.js";
-import accessLevelConnection from "../model/accessLevel.model.js";
-import { jwtSecretKey } from "../utils/common.utils.js";
-import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
+import gymInfoConnection from "../model/gymInfo.model";
+import staffInfoConnection from "../model/staffInfo.model";
+import accessLevelConnection from "../model/accessLevel.model";
+import { jwtSecretKey } from "../utils/common.utils";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils";
 
 const entryPoint = express.Router();
 
@@ -45,7 +45,7 @@ entryPoint.post("/signUp", async (req, res) => {
       message: "new gymInfo saved",
       data: saveData3,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log("save error", error);
     res.status(400).json({ message: error.message });
   }
@@ -109,7 +109,7 @@ entryPoint.put("/forgetPassword", async (req, res) => {
       }
     );
     res.status(201).json({ message: "new password success ", data: saveData });
-  } catch (error) {
+  } catch (error: any) {
     console.log("save error", error);
     res.status(400).json({ message: error.message });
   }

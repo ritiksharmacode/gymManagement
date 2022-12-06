@@ -1,26 +1,26 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils";
 
-import accessLevelConnection from "../model/accessLevel.model.js";
-import accountsConnection from "../model/accounts.model.js";
-import exerciseConnection from "../model/exercise.model.js";
-import exercisePlanConnection from "../model/exercisePlan.model.js";
-import measurementConnection from "../model/measurement.model.js";
-import mediaConnection from "../model/media.model.js";
-import newMemberConnection from "../model/newMember.model.js";
-import nutritionChartConnection from "../model/nutritionChart.model.js";
-import packagesConnection from "../model/packages.model.js";
-import paymentMethodConnection from "../model/paymentMethod.model.js";
-import purposeConnection from "../model/purpose.model.js";
-import staffInfoConnection from "../model/staffInfo.model.js";
-import subscriptionConnection from "../model/subscription.model.js";
-import workOutPlanConnection from "../model/workOutPlan.model.js";
+import accessLevelConnection from "../model/accessLevel.model";
+import accountsConnection from "../model/accounts.model";
+import exerciseConnection from "../model/exercise.model";
+import exercisePlanConnection from "../model/exercisePlan.model";
+import measurementConnection from "../model/measurement.model";
+import mediaConnection from "../model/media.model";
+import newMemberConnection from "../model/newMember.model";
+import nutritionChartConnection from "../model/nutritionChart.model";
+import packagesConnection from "../model/packages.model";
+import paymentMethodConnection from "../model/paymentMethod.model";
+import purposeConnection from "../model/purpose.model";
+import staffInfoConnection from "../model/staffInfo.model";
+import subscriptionConnection from "../model/subscription.model";
+import workOutPlanConnection from "../model/workOutPlan.model";
 
 const common = express.Router();
 const useMessage = "common";
 
-const allConnections = {
+const allConnections: any = {
   accessLevel: accessLevelConnection,
   accounts: accountsConnection,
   exercise: exerciseConnection,
@@ -82,7 +82,7 @@ common.post("/delete", async (req, res) => {
       nowBody.useWhere
     );
     res.status(201).json({ message: `${useMessage} deleted`, data: saveData });
-  } catch (error) {
+  } catch (error: any) {
     console.log("save error", error);
     res.status(401).json({ message: error.message });
   }

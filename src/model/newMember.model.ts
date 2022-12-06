@@ -15,7 +15,7 @@ const NewMemberSchema = new mongoose.Schema({
   },
   dateOfBirth: {
     type: Date,
-    default: Date("01-01-1990"),
+    default: Date,
   },
   additionalContact: {
     type: String,

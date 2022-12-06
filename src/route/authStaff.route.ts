@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import staffInfoConnection from "../model/staffInfo.model.js";
-import { mongoSave, mongoUpdate } from "../utils/mongo.utils.js";
+import staffInfoConnection from "../model/staffInfo.model";
+import { mongoSave, mongoUpdate } from "../utils/mongo.utils";
 
 const authorizedStaff = express.Router();
 
@@ -11,7 +11,7 @@ authorizedStaff.put("/", async (req, res) => {
     gymContact: req.body.userName,
     password: bcryptPassword,
   };
-  mongoUpdate(res, useModel, useMessage, useBody, req.params.useID);
+  mongoUpdate(res, req.body.useModel, "password change", useBody, req.body.useID);
 });
 
 authorizedStaff.delete("/", async (req, res) => {
@@ -28,7 +28,7 @@ authorizedStaff.delete("/", async (req, res) => {
       }
     );
     res.status(201).json({ message: "buyer logout", data: {} });
-  } catch (error) {
+  } catch (error: any) {
     console.log("save error", error);
     res.status(400).json({ message: error.message });
   }

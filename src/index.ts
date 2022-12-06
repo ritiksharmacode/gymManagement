@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import router from "./route/index.route.js";
+import router from "./route/index.route";
 
 dotenv.config();
 const app = express();
@@ -15,8 +15,8 @@ app.use("/", router);
 const start = async () => {
   try {
     mongoose.connect("mongodb://127.0.0.1:27017/gymEDiary", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
     const db = mongoose.connection;
     db.on("error", console.error.bind(console, "connection error: "));
