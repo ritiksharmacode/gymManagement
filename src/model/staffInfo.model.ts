@@ -23,7 +23,7 @@ const staffInfoSchema = new mongoose.Schema({
     required: true,
   },
   loginToken: [{ token: { type: String, required: true } }],
-});
+}, { timestamps: true });
 
 const staffInfoConnection = mongoose.model("staffInfo", staffInfoSchema);
 

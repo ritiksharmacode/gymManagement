@@ -22,7 +22,7 @@ const ExercisePlanSchema = new mongoose.Schema({
       exerciseRest: { type: String, default: "" },
     },
   ],
-});
+}, { timestamps: true });
 
 const exercisePlanConnection = mongoose.model(
   "exercisePlan",

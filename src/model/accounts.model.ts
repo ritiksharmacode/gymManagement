@@ -16,12 +16,10 @@ const AccountsSchema = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    required: true,
   },
   paymentMethod: {
     type: Schema.Types.ObjectId,
     ref: "paymentMethod",
-    required: true,
   },
 
   remarks: {
@@ -33,7 +31,7 @@ const AccountsSchema = new mongoose.Schema({
     enum: ["debit", "credit"],
     default: "debit",
   },
-});
+}, { timestamps: true });
 
 const accountsConnection = mongoose.model("account", AccountsSchema);
 

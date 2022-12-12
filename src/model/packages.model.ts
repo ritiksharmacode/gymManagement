@@ -35,7 +35,7 @@ const PackagesSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const packagesConnection = mongoose.model("package", PackagesSchema);
 

@@ -102,7 +102,7 @@ const MeasurementSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const measurementConnection = mongoose.model("measurement", MeasurementSchema);
 

@@ -42,7 +42,7 @@ const NutritionChartSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const nutritionChartConnection = mongoose.model(
   "nutritionChart",

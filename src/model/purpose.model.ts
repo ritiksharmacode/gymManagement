@@ -79,7 +79,7 @@ const PurposeSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const purposeConnection = mongoose.model("purpose", PurposeSchema);
 

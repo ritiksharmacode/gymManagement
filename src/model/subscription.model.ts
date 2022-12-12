@@ -48,7 +48,7 @@ const SubscriptionSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const subscriptionConnection = mongoose.model(
   "subscription",

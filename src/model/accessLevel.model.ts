@@ -5,7 +5,7 @@ const accessLevelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 const accessLevelConnection = mongoose.model("accessLevel", accessLevelSchema);
 

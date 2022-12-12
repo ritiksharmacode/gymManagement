@@ -9,7 +9,7 @@ const NotesSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const notesConnection = mongoose.model("note", NotesSchema);
 

@@ -13,7 +13,7 @@ const ExerciseSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const exerciseConnection = mongoose.model("exercise", ExerciseSchema);
 

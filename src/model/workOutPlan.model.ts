@@ -56,7 +56,7 @@ const WorkOutPlanSchema = new mongoose.Schema({
       ref: "exercisePlan",
     },
   ],
-});
+}, { timestamps: true });
 
 const workOutPlanConnection = mongoose.model("workOutPlan", WorkOutPlanSchema);
 

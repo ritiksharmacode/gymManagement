@@ -8,6 +8,8 @@ import authStaff from "./authStaff.route";
 import staffInfoConnection from "../model/staffInfo.model";
 
 import common from "./common.route";
+import member from "./member.route";
+import reports from "./reports.route";
 
 import { jwtSecretKey } from "../utils/common.utils";
 
@@ -62,5 +64,7 @@ router.use("/entryPoint", entryPoint);
 router.use("/authStaff", checkStaffToken, authStaff);
 
 router.use("/common", checkStaffToken, common);
+router.use("/member", checkStaffToken, member);
+router.use("/reports", checkStaffToken, reports);
 
 export default router;

@@ -9,7 +9,7 @@ const PaymentMethodsSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const paymentMethodsConnection = mongoose.model(
   "PaymentMethod",

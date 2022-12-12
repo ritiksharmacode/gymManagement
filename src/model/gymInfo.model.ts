@@ -150,7 +150,7 @@ const GymInfoSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-});
+}, { timestamps: true });
 
 const gymInfoConnection = mongoose.model("gymInfo", GymInfoSchema);
 

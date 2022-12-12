@@ -49,12 +49,12 @@ const NewMemberSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  FavourOf: {
+  favourOf: {
     type: String,
     enum: ["S/O", "D/O", "W/O"],
     default: "S/O",
   },
-  FavourName: {
+  favourName: {
     type: String,
     default: "",
   },
@@ -118,7 +118,7 @@ const NewMemberSchema = new mongoose.Schema({
     enum: ["enquiry", "newMember"],
     default: "newMember",
   },
-});
+}, { timestamps: true });
 
 const newMemberConnection = mongoose.model("newMember", NewMemberSchema);
 

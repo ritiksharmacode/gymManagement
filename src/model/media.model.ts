@@ -18,7 +18,7 @@ const MediaSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-});
+}, { timestamps: true });
 
 const mediaConnection = mongoose.model("media", MediaSchema);
 
