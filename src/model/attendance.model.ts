@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const MediaSchema = new mongoose.Schema({
+const AttendanceSchema = new mongoose.Schema({
   newMemberId: {
     type: Schema.Types.ObjectId,
     ref: "newMember",
@@ -10,8 +10,13 @@ const MediaSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    enum: ["present", "absent"],
+    default: "present",
+  },
 }, { timestamps: true });
 
-const mediaConnection = mongoose.model("media", MediaSchema);
+const mediaConnection = mongoose.model("media", AttendanceSchema);
 
 export default mediaConnection;
