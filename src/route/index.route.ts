@@ -1,16 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
-
 import jwt from "jsonwebtoken";
-
 import entryPoint from "./entryPoint.route";
 import authStaff from "./authStaff.route";
-
 import staffInfoConnection from "../model/staffInfo.model";
-
 import common from "./common.route";
 import member from "./member.route";
 import reports from "./reports.route";
-
 import { jwtSecretKey } from "../utils/common.utils";
 
 const router = express.Router();
@@ -60,9 +55,7 @@ let checkStaffToken = async (req: Request, res: Response, next: NextFunction) =>
 };
 
 router.use("/entryPoint", entryPoint);
-
 router.use("/authStaff", checkStaffToken, authStaff);
-
 router.use("/common", checkStaffToken, common);
 router.use("/member", checkStaffToken, member);
 router.use("/reports", checkStaffToken, reports);
