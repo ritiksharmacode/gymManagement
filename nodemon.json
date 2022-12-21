@@ -1,0 +1,6 @@
+{
+    "watch": ["src"],
+    "ext": "ts,env,json",
+    "ignore": ["src/public", "node_modules"],
+    "exec": "npm run lint && ts-node -r tsconfig-paths/register ./src"
+}

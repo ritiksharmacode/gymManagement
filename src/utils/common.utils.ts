@@ -1,2 +1,3 @@
-const jwtSecretKey = "meranaamritikhai";
+const jwtSecretKey = 'meranaamritikhai';
+
 export { jwtSecretKey };
