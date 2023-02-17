@@ -10,64 +10,53 @@ reports.get('/paymentRecord/:startDate/:endDate', async (req, res) => {
     try {
         // const nowBody = req.body;
 
-        // const mongoData = await accountsConnection
-        //     .find({
-        //         $and: [
-        //             { date: { $gte: moment(req.params.startDate).startOf('day') } },
-        //             { date: { $lte: moment(req.params.endDate).endOf('day') } },
-        //         ],
-        //     })
-        //     .populate('newMemberId', { name: 1, contact: 1 });
-        // const month = 1; // January
-        // const year = 2021;
-
-        const startDate = moment([2022, 12 - 1]);
-
-        const endDate = moment(startDate).clone().endOf('month').format();
-
-        console.log(startDate);
-
-        console.log(endDate);
-
-        const responseData = [];
-
-        const prepareData = [
-            { startDate: moment([2022, 11 - 1]).startOf('month'), endDate: moment([2022, 11 - 1]).endOf('month'), monthName: 'november' },
-            { startDate: moment([2022, 12 - 1]).startOf('month'), endDate: moment([2022, 12 - 1]).endOf('month'), monthName: 'december' },
-            { startDate: moment([2023, 1 - 1]).startOf('month'), endDate: moment([2023, 1 - 1]).endOf('month'), monthName: 'january' },
-            { startDate: moment([2023, 2 - 1]).startOf('month'), endDate: moment([2023, 2 - 1]).endOf('month'), monthName: 'february' },
-        ];
-
-        const inputLength = prepareData.length;
-        const allPaymentRecord = await accountsConnection
+        const mongoData = await accountsConnection
             .find({
-                $and: [{ date: { $gte: prepareData[0].startDate } }, { date: { $lte: prepareData[prepareData.length - 1].endDate } }],
+                $and: [{ date: { $gte: moment(req.params.startDate).startOf('day') } }, { date: { $lte: moment(req.params.endDate).endOf('day') } }],
             })
             .populate('newMemberId', { name: 1, contact: 1 });
+        // const responseData = [];
 
-        for (let i = 0; i < inputLength; i++) {
-            const nowData = allPaymentRecord.filter(
-                (singleRecord) => moment(singleRecord.date) >= prepareData[i].startDate && moment(singleRecord.date) <= prepareData[i].endDate,
-            );
-            const recordLength = nowData.length;
-            let totalDebit = 0;
-            let totalCredit = 0;
+        // const monthName = moment().month('november');
 
-            for (let loopCount = 0; loopCount < recordLength; loopCount++) {
-                if (nowData[loopCount].entryType === 'debit') {
-                    totalDebit += nowData[loopCount].amount || 0;
-                } else {
-                    totalCredit += nowData[loopCount].amount || 0;
-                }
-            }
+        // console.log(monthName);
+        // const prepareData = [
+        //     { startDate: moment().month('november').startOf('month'), endDate: moment().month('november').endOf('month'), monthName: 'november' },
+        //     { startDate: moment([2022, 12 - 1]).startOf('month'), endDate: moment([2022, 12 - 1]).endOf('month'), monthName: 'december' },
+        //     { startDate: moment([2023, 1 - 1]).startOf('month'), endDate: moment([2023, 1 - 1]).endOf('month'), monthName: 'january' },
+        //     { startDate: moment([2023, 2 - 1]).startOf('month'), endDate: moment([2023, 2 - 1]).endOf('month'), monthName: 'february' },
+        // ];
 
-            const prepareResponse: any = {};
+        // const inputLength = prepareData.length;
+        // const allPaymentRecord = await accountsConnection
+        //     .find({
+        //         $and: [{ date: { $gte: prepareData[0].startDate } }, { date: { $lte: prepareData[prepareData.length - 1].endDate } }],
+        //     })
+        //     .populate('newMemberId', { name: 1, contact: 1 });
 
-            prepareResponse[prepareData[i].monthName] = { totalDebit, totalCredit, allData: nowData };
-            responseData.push(prepareResponse);
-        }
+        // for (let i = 0; i < inputLength; i++) {
+        //     const nowData = allPaymentRecord.filter(
+        //         (singleRecord) => moment(singleRecord.date) >= prepareData[i].startDate && moment(singleRecord.date) <= prepareData[i].endDate,
+        //     );
+        //     const recordLength = nowData.length;
+        //     let totalDebit = 0;
+        //     let totalCredit = 0;
 
-        res.send({ message: 'all reports', data: responseData });
+        //     for (let loopCount = 0; loopCount < recordLength; loopCount++) {
+        //         if (nowData[loopCount].entryType === 'debit') {
+        //             totalDebit += nowData[loopCount].amount || 0;
+        //         } else {
+        //             totalCredit += nowData[loopCount].amount || 0;
+        //         }
+        //     }
+
+        //     const prepareResponse: any = {};
+
+        //     prepareResponse[prepareData[i].monthName] = { totalDebit, totalCredit, allData: nowData };
+        //     responseData.push(prepareResponse);
+        // }
+
+        res.send({ message: 'all reports', data: mongoData });
     } catch (error) {
         console.log('save error', error);
         res.status(401).json({ message: error });

@@ -1,7 +1,6 @@
 import express from 'express';
 import subscriptionConnection from '../model/subscription.model';
 import accountsConnection from '../model/accounts.model';
-
 const member = express.Router();
 
 member.post('/', async (req, res) => {

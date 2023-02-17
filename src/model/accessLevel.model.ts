@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const accessLevelSchema = new mongoose.Schema(
+const AccessLevelSchema = new mongoose.Schema(
     {
         accessLevelName: {
             type: String,
@@ -10,6 +10,6 @@ const accessLevelSchema = new mongoose.Schema(
     { timestamps: true },
 );
 
-const accessLevelConnection = mongoose.model('accessLevel', accessLevelSchema);
+const accessLevelConnection = mongoose.model('accessLevel', AccessLevelSchema);
 
 export default accessLevelConnection;

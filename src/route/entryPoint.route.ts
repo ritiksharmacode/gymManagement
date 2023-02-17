@@ -148,12 +148,10 @@ entryPoint.post('/mediaUpload', upload, async (req, res) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-entryPoint.get('/email', async (req, res) => {
+entryPoint.get('/email', upload, async (req, res) => {
     try {
         const transporter = nodemailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
-            secure: false,
+            service: 'gmail',
             auth: {
                 user: 'rritikssharma1920@gmail.com',
                 pass: 'zgbaxrzxeudqezky',
@@ -163,8 +161,16 @@ entryPoint.get('/email', async (req, res) => {
         const mailOptions = await transporter.sendMail({
             from: 'rritikssharma1920@gmail.com',
             to: 'rritikssharma1920@gmail.com',
-            subject: 'Hello ✔',
-            text: 'Hello world?',
+            subject: 'offer letter',
+            text: 'how are you',
+            html: '<u><h1><body style="background-color:SlateBlue;">Paragraphs are medium-sized units of writing, longer than sentences, but shorter than sections, chapters, or entire works. Because they connect the “small” ideas of individual sentences to a “bigger” idea, paragraph structure is essential to any writing for organization, flow, and comprehension. </body></h1><u>',
+
+            attachments: [
+                {
+                    filename: 'photo_name-1671204505197.jpg',
+                    path: 'uploads/photo_name-1671204505197.jpg',
+                },
+            ],
         });
 
         res.status(201).json({ message: 'email sent  ', data: mailOptions });
